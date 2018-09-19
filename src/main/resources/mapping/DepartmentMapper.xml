@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kbs.base.dao.DepartmentMapper">
+    <resultMap id="BaseResultMap" type="com.kbs.base.model.Department">
+        <id column="department_id" property="departmentId"/>
+        <result column="department_code" property="departmentCode"/>
+        <result column="department_category" property="departmentCategory"/>
+        <result column="hospital_id" property="hospitalId"/>
+        <result column="hospital_code" property="hospitalCode"/>
+        <result column="department_full_name" property="departmentFullName"/>
+        <result column="department_simple_name" property="departmentSimpleName"/>
+        <result column="department_desc" property="departmentDesc"/>
+        <result column="parent_department_id" property="parentDepartmentId"/>
+        <result column="deparment_address" property="deparmentAddress"/>
+        <result column="is_characteristic_department" property="isCharacteristicDepartment"/>
+        <result column="is_delete" property="isDelete"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="bed_number" property="bedNumber"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    department_id, department_code, department_category, hospital_id, hospital_code, 
+    department_full_name, department_simple_name, department_desc, parent_department_id, 
+    deparment_address, is_characteristic_department, is_delete, create_by, create_time, 
+    update_by, update_time, bed_number
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from kbs_department
+        where department_id = #{departmentId}
+    </select>
+
+    <select id="selectByDepartmentCode" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from kbs_department
+        where hospital_id = (select hospital_id from kbs_hospital where hospital_code=#{hospitalCode})
+        and department_code=#{departmentCode} and is_delete=0
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from kbs_department
+    where department_id = #{departmentId}
+  </delete>
+    <insert id="insert" parameterType="com.kbs.base.model.Department">
+    insert into kbs_department (department_id, department_code, department_category, 
+      hospital_id, hospital_code, department_full_name, 
+      department_simple_name, department_desc, parent_department_id, 
+      deparment_address, is_characteristic_department, 
+      is_delete, create_by, create_time, 
+      update_by, update_time, bed_number
+      )
+    values (#{departmentId}, #{departmentCode}, #{departmentCategory}, 
+      #{hospitalId}, #{hospitalCode}, #{departmentFullName}, 
+      #{departmentSimpleName}, #{departmentDesc}, #{parentDepartmentId}, 
+      #{deparmentAddress}, #{isCharacteristicDepartment}, 
+      #{isDelete}, #{createBy}, #{createTime}, 
+      #{updateBy}, #{updateTime}, #{bedNumber}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.kbs.base.model.Department">
+        insert into kbs_department
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="departmentId != null">
+                department_id,
+            </if>
+            <if test="departmentCode != null">
+                department_code,
+            </if>
+            <if test="departmentCategory != null">
+                department_category,
+            </if>
+            <if test="hospitalId != null">
+                hospital_id,
+            </if>
+            <if test="hospitalCode != null">
+                hospital_code,
+            </if>
+            <if test="departmentFullName != null">
+                department_full_name,
+            </if>
+            <if test="departmentSimpleName != null">
+                department_simple_name,
+            </if>
+            <if test="departmentDesc != null">
+                department_desc,
+            </if>
+            <if test="parentDepartmentId != null">
+                parent_department_id,
+            </if>
+            <if test="deparmentAddress != null">
+                deparment_address,
+            </if>
+            <if test="isCharacteristicDepartment != null">
+                is_characteristic_department,
+            </if>
+            <if test="isDelete != null">
+                is_delete,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="bedNumber != null">
+                bed_number,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="departmentId != null">
+                #{departmentId},
+            </if>
+            <if test="departmentCode != null">
+                #{departmentCode},
+            </if>
+            <if test="departmentCategory != null">
+                #{departmentCategory},
+            </if>
+            <if test="hospitalId != null">
+                #{hospitalId},
+            </if>
+            <if test="hospitalCode != null">
+                #{hospitalCode},
+            </if>
+            <if test="departmentFullName != null">
+                #{departmentFullName},
+            </if>
+            <if test="departmentSimpleName != null">
+                #{departmentSimpleName},
+            </if>
+            <if test="departmentDesc != null">
+                #{departmentDesc},
+            </if>
+            <if test="parentDepartmentId != null">
+                #{parentDepartmentId},
+            </if>
+            <if test="deparmentAddress != null">
+                #{deparmentAddress},
+            </if>
+            <if test="isCharacteristicDepartment != null">
+                #{isCharacteristicDepartment},
+            </if>
+            <if test="isDelete != null">
+                #{isDelete},
+            </if>
+            <if test="createBy != null">
+                #{createBy},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime},
+            </if>
+            <if test="bedNumber != null">
+                #{bedNumber},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.kbs.base.model.Department">
+        update kbs_department
+        <set>
+            <if test="departmentCode != null">
+                department_code = #{departmentCode},
+            </if>
+            <if test="departmentCategory != null">
+                department_category = #{departmentCategory},
+            </if>
+            <if test="hospitalId != null">
+                hospital_id = #{hospitalId},
+            </if>
+            <if test="hospitalCode != null">
+                hospital_code = #{hospitalCode},
+            </if>
+            <if test="departmentFullName != null">
+                department_full_name = #{departmentFullName},
+            </if>
+            <if test="departmentSimpleName != null">
+                department_simple_name = #{departmentSimpleName},
+            </if>
+            <if test="departmentDesc != null">
+                department_desc = #{departmentDesc},
+            </if>
+            <if test="parentDepartmentId != null">
+                parent_department_id = #{parentDepartmentId},
+            </if>
+            <if test="deparmentAddress != null">
+                deparment_address = #{deparmentAddress},
+            </if>
+            <if test="isCharacteristicDepartment != null">
+                is_characteristic_department = #{isCharacteristicDepartment},
+            </if>
+            <if test="isDelete != null">
+                is_delete = #{isDelete},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="bedNumber != null">
+                bed_number = #{bedNumber},
+            </if>
+        </set>
+        where department_id = #{departmentId}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.kbs.base.model.Department">
+    update kbs_department
+    set department_code = #{departmentCode},
+      department_category = #{departmentCategory},
+      hospital_id = #{hospitalId},
+      hospital_code = #{hospitalCode},
+      department_full_name = #{departmentFullName},
+      department_simple_name = #{departmentSimpleName},
+      department_desc = #{departmentDesc},
+      parent_department_id = #{parentDepartmentId},
+      deparment_address = #{deparmentAddress},
+      is_characteristic_department = #{isCharacteristicDepartment},
+      is_delete = #{isDelete},
+      create_by = #{createBy},
+      create_time = #{createTime},
+      update_by = #{updateBy},
+      update_time = #{updateTime},
+      bed_number = #{bedNumber}
+    where department_id = #{departmentId}
+  </update>
+</mapper>

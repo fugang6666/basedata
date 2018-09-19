@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kbs.base.dao.DeviceInformationMapper" >
+  <resultMap id="BaseResultMap" type="com.kbs.base.model.DeviceInformation" >
+    <id column="device_information_id" property="deviceInformationId"  />
+    <result column="device_information_number" property="deviceInformationNumber"  />
+    <result column="device_name" property="deviceName"  />
+    <result column="device_mac" property="deviceMac"  />
+    <result column="device_cpu" property="deviceCpu"  />
+    <result column="device_app_version" property="deviceAppVersion"  />
+    <result column="device_os_version" property="deviceOsVersion"  />
+    <result column="device_manufacturer" property="deviceManufacturer"  />
+    <result column="device_type" property="deviceType"  />
+    <result column="hospital_id" property="hospitalId"  />
+    <result column="department_id" property="departmentId"  />
+    <result column="infected_patch_id" property="infectedPatchId"  />
+    <result column="bed_number" property="bedNumber"  />
+    <result column="device_change_time" property="deviceChangeTime"  />
+    <result column="device_status" property="deviceStatus"  />
+    <result column="create_by" property="createBy"  />
+    <result column="create_time" property="createTime"  />
+    <result column="update_by" property="updateBy"  />
+    <result column="update_time" property="updateTime"  />
+    <result column="bed_id" property="bedId"  />
+    <result column="device_position" property="devicePosition"  />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    device_information_id, device_information_number, device_name, device_mac, device_cpu, 
+    device_app_version, device_os_version, device_manufacturer, device_type, hospital_id, 
+    department_id, infected_patch_id, bed_number, device_change_time, device_status, 
+    create_by, create_time, update_by, update_time, bed_id, device_position
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from kbs_device_information
+    where device_information_id = #{deviceInformationId}
+  </select>
+
+  <select id="selectByDeviceCpu" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from kbs_device_information
+    where device_cpu = #{deviceCpu} and device_status=1
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from kbs_device_information
+    where device_information_id = #{deviceInformationId}
+  </delete>
+  <insert id="insert" parameterType="com.kbs.base.model.DeviceInformation" >
+    insert into kbs_device_information (device_information_id, device_information_number, 
+      device_name, device_mac, device_cpu, 
+      device_app_version, device_os_version, device_manufacturer, 
+      device_type, hospital_id, department_id, 
+      infected_patch_id, bed_number, device_change_time, 
+      device_status, create_by, create_time, 
+      update_by, update_time, bed_id, 
+      device_position)
+    values (#{deviceInformationId}, #{deviceInformationNumber}, 
+      #{deviceName}, #{deviceMac}, #{deviceCpu}, 
+      #{deviceAppVersion}, #{deviceOsVersion}, #{deviceManufacturer}, 
+      #{deviceType}, #{hospitalId}, #{departmentId}, 
+      #{infectedPatchId}, #{bedNumber}, #{deviceChangeTime}, 
+      #{deviceStatus}, #{createBy}, #{createTime}, 
+      #{updateBy}, #{updateTime}, #{bedId}, 
+      #{devicePosition})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kbs.base.model.DeviceInformation" >
+    insert into kbs_device_information
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="deviceInformationId != null" >
+        device_information_id,
+      </if>
+      <if test="deviceInformationNumber != null" >
+        device_information_number,
+      </if>
+      <if test="deviceName != null" >
+        device_name,
+      </if>
+      <if test="deviceMac != null" >
+        device_mac,
+      </if>
+      <if test="deviceCpu != null" >
+        device_cpu,
+      </if>
+      <if test="deviceAppVersion != null" >
+        device_app_version,
+      </if>
+      <if test="deviceOsVersion != null" >
+        device_os_version,
+      </if>
+      <if test="deviceManufacturer != null" >
+        device_manufacturer,
+      </if>
+      <if test="deviceType != null" >
+        device_type,
+      </if>
+      <if test="hospitalId != null" >
+        hospital_id,
+      </if>
+      <if test="departmentId != null" >
+        department_id,
+      </if>
+      <if test="infectedPatchId != null" >
+        infected_patch_id,
+      </if>
+      <if test="bedNumber != null" >
+        bed_number,
+      </if>
+      <if test="deviceChangeTime != null" >
+        device_change_time,
+      </if>
+      <if test="deviceStatus != null" >
+        device_status,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="bedId != null" >
+        bed_id,
+      </if>
+      <if test="devicePosition != null" >
+        device_position,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="deviceInformationId != null" >
+        #{deviceInformationId},
+      </if>
+      <if test="deviceInformationNumber != null" >
+        #{deviceInformationNumber},
+      </if>
+      <if test="deviceName != null" >
+        #{deviceName},
+      </if>
+      <if test="deviceMac != null" >
+        #{deviceMac},
+      </if>
+      <if test="deviceCpu != null" >
+        #{deviceCpu},
+      </if>
+      <if test="deviceAppVersion != null" >
+        #{deviceAppVersion},
+      </if>
+      <if test="deviceOsVersion != null" >
+        #{deviceOsVersion},
+      </if>
+      <if test="deviceManufacturer != null" >
+        #{deviceManufacturer},
+      </if>
+      <if test="deviceType != null" >
+        #{deviceType},
+      </if>
+      <if test="hospitalId != null" >
+        #{hospitalId},
+      </if>
+      <if test="departmentId != null" >
+        #{departmentId},
+      </if>
+      <if test="infectedPatchId != null" >
+        #{infectedPatchId},
+      </if>
+      <if test="bedNumber != null" >
+        #{bedNumber},
+      </if>
+      <if test="deviceChangeTime != null" >
+        #{deviceChangeTime},
+      </if>
+      <if test="deviceStatus != null" >
+        #{deviceStatus},
+      </if>
+      <if test="createBy != null" >
+        #{createBy},
+      </if>
+      <if test="createTime != null" >
+        #{createTime},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime},
+      </if>
+      <if test="bedId != null" >
+        #{bedId},
+      </if>
+      <if test="devicePosition != null" >
+        #{devicePosition},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kbs.base.model.DeviceInformation" >
+    update kbs_device_information
+    <set >
+      <if test="deviceInformationNumber != null" >
+        device_information_number = #{deviceInformationNumber},
+      </if>
+      <if test="deviceName != null" >
+        device_name = #{deviceName},
+      </if>
+      <if test="deviceMac != null" >
+        device_mac = #{deviceMac},
+      </if>
+      <if test="deviceCpu != null" >
+        device_cpu = #{deviceCpu},
+      </if>
+      <if test="deviceAppVersion != null" >
+        device_app_version = #{deviceAppVersion},
+      </if>
+      <if test="deviceOsVersion != null" >
+        device_os_version = #{deviceOsVersion},
+      </if>
+      <if test="deviceManufacturer != null" >
+        device_manufacturer = #{deviceManufacturer},
+      </if>
+      <if test="deviceType != null" >
+        device_type = #{deviceType},
+      </if>
+      <if test="hospitalId != null" >
+        hospital_id = #{hospitalId},
+      </if>
+      <if test="departmentId != null" >
+        department_id = #{departmentId},
+      </if>
+      <if test="infectedPatchId != null" >
+        infected_patch_id = #{infectedPatchId},
+      </if>
+      <if test="bedNumber != null" >
+        bed_number = #{bedNumber},
+      </if>
+      <if test="deviceChangeTime != null" >
+        device_change_time = #{deviceChangeTime},
+      </if>
+      <if test="deviceStatus != null" >
+        device_status = #{deviceStatus},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime},
+      </if>
+      <if test="bedId != null" >
+        bed_id = #{bedId},
+      </if>
+      <if test="devicePosition != null" >
+        device_position = #{devicePosition},
+      </if>
+    </set>
+    where device_information_id = #{deviceInformationId}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kbs.base.model.DeviceInformation" >
+    update kbs_device_information
+    set device_information_number = #{deviceInformationNumber},
+      device_name = #{deviceName},
+      device_mac = #{deviceMac},
+      device_cpu = #{deviceCpu},
+      device_app_version = #{deviceAppVersion},
+      device_os_version = #{deviceOsVersion},
+      device_manufacturer = #{deviceManufacturer},
+      device_type = #{deviceType},
+      hospital_id = #{hospitalId},
+      department_id = #{departmentId},
+      infected_patch_id = #{infectedPatchId},
+      bed_number = #{bedNumber},
+      device_change_time = #{deviceChangeTime},
+      device_status = #{deviceStatus},
+      create_by = #{createBy},
+      create_time = #{createTime},
+      update_by = #{updateBy},
+      update_time = #{updateTime},
+      bed_id = #{bedId},
+      device_position = #{devicePosition}
+    where device_information_id = #{deviceInformationId}
+  </update>
+</mapper>

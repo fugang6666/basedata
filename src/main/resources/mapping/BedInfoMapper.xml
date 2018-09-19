@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kbs.base.dao.BedInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.kbs.base.model.BedInfo" >
+    <id column="bed_id" property="bedId"  />
+    <result column="hospital_id" property="hospitalId"  />
+    <result column="hospital_name" property="hospitalName"  />
+    <result column="department_id" property="departmentId"  />
+    <result column="department_name" property="departmentName"  />
+    <result column="infected_patch_id" property="infectedPatchId"  />
+    <result column="his_code" property="hisCode"  />
+    <result column="infected_patch_name" property="infectedPatchName"  />
+    <result column="bed_name" property="bedName"  />
+    <result column="bed_number" property="bedNumber"  />
+    <result column="bed_sort" property="bedSort"  />
+    <result column="room_name" property="roomName"  />
+    <result column="create_time" property="createTime"  />
+    <result column="create_by" property="createBy"  />
+    <result column="bed_status" property="bedStatus"  />
+    <result column="update_time" property="updateTime"  />
+    <result column="update_by" property="updateBy"  />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    bed_id, hospital_id, hospital_name, department_id, department_name, infected_patch_id, 
+    his_code, infected_patch_name, bed_name, bed_number, bed_sort, room_name, create_time, 
+    create_by, bed_status, update_time, update_by
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from kbs_bed_info
+    where bed_id = #{bedId}
+  </select>
+  <select id="selectByBedCode" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from kbs_bed_info
+    where hospital_id = (select hospital_id from kbs_hospital where hospital_code=#{hospitalCode})
+    and bed_number=#{bedCode}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from kbs_bed_info
+    where bed_id = #{bedId}
+  </delete>
+  <insert id="insert" parameterType="com.kbs.base.model.BedInfo" >
+    insert into kbs_bed_info (bed_id, hospital_id, hospital_name, 
+      department_id, department_name, infected_patch_id, 
+      his_code, infected_patch_name, bed_name, 
+      bed_number, bed_sort, room_name, 
+      create_time, create_by, bed_status, 
+      update_time, update_by)
+    values (#{bedId}, #{hospitalId}, #{hospitalName}, 
+      #{departmentId}, #{departmentName}, #{infectedPatchId}, 
+      #{hisCode}, #{infectedPatchName}, #{bedName}, 
+      #{bedNumber}, #{bedSort}, #{roomName}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createBy}, #{bedStatus}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateBy})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kbs.base.model.BedInfo" >
+    insert into kbs_bed_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bedId != null" >
+        bed_id,
+      </if>
+      <if test="hospitalId != null" >
+        hospital_id,
+      </if>
+      <if test="hospitalName != null" >
+        hospital_name,
+      </if>
+      <if test="departmentId != null" >
+        department_id,
+      </if>
+      <if test="departmentName != null" >
+        department_name,
+      </if>
+      <if test="infectedPatchId != null" >
+        infected_patch_id,
+      </if>
+      <if test="hisCode != null" >
+        his_code,
+      </if>
+      <if test="infectedPatchName != null" >
+        infected_patch_name,
+      </if>
+      <if test="bedName != null" >
+        bed_name,
+      </if>
+      <if test="bedNumber != null" >
+        bed_number,
+      </if>
+      <if test="bedSort != null" >
+        bed_sort,
+      </if>
+      <if test="roomName != null" >
+        room_name,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="bedStatus != null" >
+        bed_status,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bedId != null" >
+        #{bedId},
+      </if>
+      <if test="hospitalId != null" >
+        #{hospitalId},
+      </if>
+      <if test="hospitalName != null" >
+        #{hospitalName},
+      </if>
+      <if test="departmentId != null" >
+        #{departmentId},
+      </if>
+      <if test="departmentName != null" >
+        #{departmentName},
+      </if>
+      <if test="infectedPatchId != null" >
+        #{infectedPatchId},
+      </if>
+      <if test="hisCode != null" >
+        #{hisCode},
+      </if>
+      <if test="infectedPatchName != null" >
+        #{infectedPatchName},
+      </if>
+      <if test="bedName != null" >
+        #{bedName},
+      </if>
+      <if test="bedNumber != null" >
+        #{bedNumber},
+      </if>
+      <if test="bedSort != null" >
+        #{bedSort},
+      </if>
+      <if test="roomName != null" >
+        #{roomName},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy},
+      </if>
+      <if test="bedStatus != null" >
+        #{bedStatus},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kbs.base.model.BedInfo" >
+    update kbs_bed_info
+    <set >
+      <if test="hospitalId != null" >
+        hospital_id = #{hospitalId},
+      </if>
+      <if test="hospitalName != null" >
+        hospital_name = #{hospitalName},
+      </if>
+      <if test="departmentId != null" >
+        department_id = #{departmentId},
+      </if>
+      <if test="departmentName != null" >
+        department_name = #{departmentName},
+      </if>
+      <if test="infectedPatchId != null" >
+        infected_patch_id = #{infectedPatchId},
+      </if>
+      <if test="hisCode != null" >
+        his_code = #{hisCode},
+      </if>
+      <if test="infectedPatchName != null" >
+        infected_patch_name = #{infectedPatchName},
+      </if>
+      <if test="bedName != null" >
+        bed_name = #{bedName},
+      </if>
+      <if test="bedNumber != null" >
+        bed_number = #{bedNumber},
+      </if>
+      <if test="bedSort != null" >
+        bed_sort = #{bedSort},
+      </if>
+      <if test="roomName != null" >
+        room_name = #{roomName},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy},
+      </if>
+      <if test="bedStatus != null" >
+        bed_status = #{bedStatus},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy},
+      </if>
+    </set>
+    where bed_id = #{bedId}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kbs.base.model.BedInfo" >
+    update kbs_bed_info
+    set hospital_id = #{hospitalId},
+      hospital_name = #{hospitalName},
+      department_id = #{departmentId},
+      department_name = #{departmentName},
+      infected_patch_id = #{infectedPatchId},
+      his_code = #{hisCode},
+      infected_patch_name = #{infectedPatchName},
+      bed_name = #{bedName},
+      bed_number = #{bedNumber},
+      bed_sort = #{bedSort},
+      room_name = #{roomName},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy},
+      bed_status = #{bedStatus},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy}
+    where bed_id = #{bedId}
+  </update>
+</mapper>

@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kbs.base.dao.HospitalMapper">
+    <resultMap id="BaseResultMap" type="com.kbs.base.model.Hospital">
+        <id column="hospital_id" property="hospitalId"/>
+        <result column="hospital_code" property="hospitalCode"/>
+        <result column="hospital_full_name" property="hospitalFullName"/>
+        <result column="hospital_simple_name" property="hospitalSimpleName"/>
+        <result column="responsible_person" property="responsiblePerson"/>
+        <result column="department_count" property="departmentCount"/>
+        <result column="bed_count" property="bedCount"/>
+        <result column="nurse_station_count" property="nurseStationCount"/>
+        <result column="hospital_url" property="hospitalUrl"/>
+        <result column="his_manufacturer" property="hisManufacturer"/>
+        <result column="hospital_desc" property="hospitalDesc"/>
+        <result column="province_id" property="provinceId"/>
+        <result column="city_id" property="cityId"/>
+        <result column="district_id" property="districtId"/>
+        <result column="hospital_address" property="hospitalAddress"/>
+        <result column="hospital_tel" property="hospitalTel"/>
+        <result column="hospital_level" property="hospitalLevel"/>
+        <result column="hospital_nature" property="hospitalNature"/>
+        <result column="hospital_status" property="hospitalStatus"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="is_delete" property="isDelete"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    hospital_id, hospital_code, hospital_full_name, hospital_simple_name, responsible_person, 
+    department_count, bed_count, nurse_station_count, hospital_url, his_manufacturer, 
+    hospital_desc, province_id, city_id, district_id, hospital_address, hospital_tel, 
+    hospital_level, hospital_nature, hospital_status, create_by, create_time, update_by, 
+    update_time, is_delete
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from kbs_hospital
+        where hospital_id = #{hospitalId}
+    </select>
+    <!--根据医院code查询医院信息-->
+    <select id="selectByHospitalCode" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from kbs_hospital
+        where hospital_code = #{hospitalCode} and is_delete=0
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from kbs_hospital
+    where hospital_id = #{hospitalId}
+  </delete>
+    <insert id="insert" parameterType="com.kbs.base.model.Hospital">
+    insert into kbs_hospital (hospital_id, hospital_code, hospital_full_name, 
+      hospital_simple_name, responsible_person, 
+      department_count, bed_count, nurse_station_count, 
+      hospital_url, his_manufacturer, hospital_desc, 
+      province_id, city_id, district_id, 
+      hospital_address, hospital_tel, hospital_level, 
+      hospital_nature, hospital_status, create_by, 
+      create_time, update_by, update_time, 
+      is_delete)
+    values (#{hospitalId}, #{hospitalCode}, #{hospitalFullName}, 
+      #{hospitalSimpleName}, #{responsiblePerson}, 
+      #{departmentCount}, #{bedCount}, #{nurseStationCount}, 
+      #{hospitalUrl}, #{hisManufacturer}, #{hospitalDesc}, 
+      #{provinceId}, #{cityId}, #{districtId}, 
+      #{hospitalAddress}, #{hospitalTel}, #{hospitalLevel}, 
+      #{hospitalNature}, #{hospitalStatus}, #{createBy}, 
+      #{createTime}, #{updateBy}, #{updateTime}, 
+      #{isDelete)
+  </insert>
+    <insert id="insertSelective" parameterType="com.kbs.base.model.Hospital">
+        insert into kbs_hospital
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="hospitalId != null">
+                hospital_id,
+            </if>
+            <if test="hospitalCode != null">
+                hospital_code,
+            </if>
+            <if test="hospitalFullName != null">
+                hospital_full_name,
+            </if>
+            <if test="hospitalSimpleName != null">
+                hospital_simple_name,
+            </if>
+            <if test="responsiblePerson != null">
+                responsible_person,
+            </if>
+            <if test="departmentCount != null">
+                department_count,
+            </if>
+            <if test="bedCount != null">
+                bed_count,
+            </if>
+            <if test="nurseStationCount != null">
+                nurse_station_count,
+            </if>
+            <if test="hospitalUrl != null">
+                hospital_url,
+            </if>
+            <if test="hisManufacturer != null">
+                his_manufacturer,
+            </if>
+            <if test="hospitalDesc != null">
+                hospital_desc,
+            </if>
+            <if test="provinceId != null">
+                province_id,
+            </if>
+            <if test="cityId != null">
+                city_id,
+            </if>
+            <if test="districtId != null">
+                district_id,
+            </if>
+            <if test="hospitalAddress != null">
+                hospital_address,
+            </if>
+            <if test="hospitalTel != null">
+                hospital_tel,
+            </if>
+            <if test="hospitalLevel != null">
+                hospital_level,
+            </if>
+            <if test="hospitalNature != null">
+                hospital_nature,
+            </if>
+            <if test="hospitalStatus != null">
+                hospital_status,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="isDelete != null">
+                is_delete,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="hospitalId != null">
+                #{hospitalId},
+            </if>
+            <if test="hospitalCode != null">
+                #{hospitalCode},
+            </if>
+            <if test="hospitalFullName != null">
+                #{hospitalFullName},
+            </if>
+            <if test="hospitalSimpleName != null">
+                #{hospitalSimpleName},
+            </if>
+            <if test="responsiblePerson != null">
+                #{responsiblePerson},
+            </if>
+            <if test="departmentCount != null">
+                #{departmentCount},
+            </if>
+            <if test="bedCount != null">
+                #{bedCount},
+            </if>
+            <if test="nurseStationCount != null">
+                #{nurseStationCount},
+            </if>
+            <if test="hospitalUrl != null">
+                #{hospitalUrl},
+            </if>
+            <if test="hisManufacturer != null">
+                #{hisManufacturer},
+            </if>
+            <if test="hospitalDesc != null">
+                #{hospitalDesc},
+            </if>
+            <if test="provinceId != null">
+                #{provinceId},
+            </if>
+            <if test="cityId != null">
+                #{cityId},
+            </if>
+            <if test="districtId != null">
+                #{districtId},
+            </if>
+            <if test="hospitalAddress != null">
+                #{hospitalAddress},
+            </if>
+            <if test="hospitalTel != null">
+                #{hospitalTel},
+            </if>
+            <if test="hospitalLevel != null">
+                #{hospitalLevel},
+            </if>
+            <if test="hospitalNature != null">
+                #{hospitalNature},
+            </if>
+            <if test="hospitalStatus != null">
+                #{hospitalStatus},
+            </if>
+            <if test="createBy != null">
+                #{createBy},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime},
+            </if>
+            <if test="isDelete != null">
+                #{isDelete,
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.kbs.base.model.Hospital">
+        update kbs_hospital
+        <set>
+            <if test="hospitalCode != null">
+                hospital_code = #{hospitalCode},
+            </if>
+            <if test="hospitalFullName != null">
+                hospital_full_name = #{hospitalFullName},
+            </if>
+            <if test="hospitalSimpleName != null">
+                hospital_simple_name = #{hospitalSimpleName},
+            </if>
+            <if test="responsiblePerson != null">
+                responsible_person = #{responsiblePerson},
+            </if>
+            <if test="departmentCount != null">
+                department_count = #{departmentCount},
+            </if>
+            <if test="bedCount != null">
+                bed_count = #{bedCount},
+            </if>
+            <if test="nurseStationCount != null">
+                nurse_station_count = #{nurseStationCount},
+            </if>
+            <if test="hospitalUrl != null">
+                hospital_url = #{hospitalUrl},
+            </if>
+            <if test="hisManufacturer != null">
+                his_manufacturer = #{hisManufacturer},
+            </if>
+            <if test="hospitalDesc != null">
+                hospital_desc = #{hospitalDesc},
+            </if>
+            <if test="provinceId != null">
+                province_id = #{provinceId},
+            </if>
+            <if test="cityId != null">
+                city_id = #{cityId},
+            </if>
+            <if test="districtId != null">
+                district_id = #{districtId},
+            </if>
+            <if test="hospitalAddress != null">
+                hospital_address = #{hospitalAddress},
+            </if>
+            <if test="hospitalTel != null">
+                hospital_tel = #{hospitalTel},
+            </if>
+            <if test="hospitalLevel != null">
+                hospital_level = #{hospitalLevel},
+            </if>
+            <if test="hospitalNature != null">
+                hospital_nature = #{hospitalNature},
+            </if>
+            <if test="hospitalStatus != null">
+                hospital_status = #{hospitalStatus},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="isDelete != null">
+                is_delete = #{isDelete,
+            </if>
+        </set>
+        where hospital_id = #{hospitalId}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.kbs.base.model.Hospital">
+    update kbs_hospital
+    set hospital_code = #{hospitalCode},
+      hospital_full_name = #{hospitalFullName},
+      hospital_simple_name = #{hospitalSimpleName},
+      responsible_person = #{responsiblePerson},
+      department_count = #{departmentCount},
+      bed_count = #{bedCount},
+      nurse_station_count = #{nurseStationCount},
+      hospital_url = #{hospitalUrl},
+      his_manufacturer = #{hisManufacturer},
+      hospital_desc = #{hospitalDesc},
+      province_id = #{provinceId},
+      city_id = #{cityId},
+      district_id = #{districtId},
+      hospital_address = #{hospitalAddress},
+      hospital_tel = #{hospitalTel},
+      hospital_level = #{hospitalLevel},
+      hospital_nature = #{hospitalNature},
+      hospital_status = #{hospitalStatus},
+      create_by = #{createBy},
+      create_time = #{createTime},
+      update_by = #{updateBy},
+      update_time = #{updateTime},
+      is_delete = #{isDelete
+    where hospital_id = #{hospitalId}
+  </update>
+</mapper>
