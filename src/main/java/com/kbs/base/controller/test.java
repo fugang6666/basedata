@@ -17,7 +17,7 @@ public class test {
 
     @GetMapping(value = "/querySickBeds")
     public void querySickBedByHospitalCode() {
-        logger.info("2222222222222222222");
+        logger.info("6666666666666666666666666");
         return;
     }
 }
